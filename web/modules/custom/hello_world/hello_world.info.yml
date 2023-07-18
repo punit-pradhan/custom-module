@@ -1,0 +1,33 @@
+name: Hello World Module
+description: Creates a page showing "Hello World".
+package: Custom
+
+type: module
+core_version_requirement: ^9.4 || ^10
+
+dependencies:
+  - drupal:link
+  - drupal:views
+  - paragraphs:paragraphs
+  - webform:webform (>=6.1.0)
+
+test_dependencies:
+ - drupal:image
+
+configure: hello_world.settings
+configure_parameters:
+  pluginId: hello_world_plugin
+
+php: 8.0
+
+hidden: true
+required: true
+
+# Set the module lifecycle status deprecated
+lifecycle: deprecated
+lifecycle_link: https://www.drupal.org/node/3223395#s-aggregator
+
+# Note: do not add the 'version' or 'project' properties yourself.
+# They will be added automatically by the packager on drupal.org.
+# version: 1.0
+# project: 'hello_world'
