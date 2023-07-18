@@ -1,4 +1,4 @@
-name: Hello World Module
+name: hello_world
 description: Creates a page showing "Hello World".
 package: Custom
 
@@ -6,10 +6,8 @@ type: module
 core_version_requirement: ^9.4 || ^10
 
 dependencies:
-  - drupal:link
-  - drupal:views
-  - paragraphs:paragraphs
-  - webform:webform (>=6.1.0)
+
+  - webform:webform
 
 test_dependencies:
  - drupal:image
