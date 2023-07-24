@@ -1,0 +1,5 @@
+name: custom_otll_form
+description: Provides an Ajax form to generate OTLL for users.".
+
+type: module
+core_version_requirement: ^9.4 || ^10
