@@ -3,3 +3,4 @@ description: 'Practice the custom module building'
 type: module
 package: Custom
 core_version_requirement: ^9 || ^10
+configure: mymodule.sayhello
