@@ -1,0 +1,8 @@
+# Schema for the configuration files of the form module.
+custom_form.settings:
+  type: config_object
+  label: 'form settings'
+  mapping:
+    example:
+      type: string
+      label: 'Example'
