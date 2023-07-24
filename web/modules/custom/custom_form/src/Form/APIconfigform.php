@@ -6,6 +6,8 @@ namespace Drupal\custom_form\Form;
 
 use Drupal\Core\Form\ConfigFormBase;
 use Drupal\Core\Form\FormStateInterface;
+use Drupal\Core\Ajax\AjaxResponse;
+use Drupal\Core\Ajax\HtmlCommand;
 
 /**
  * Configure form settings for this site.
@@ -43,6 +45,16 @@ final class APIconfigform extends ConfigFormBase {
       '#title' => $this->t('Phone Number'),
       '#default_value' => $this->config('custom_form.settings')->get('phone_number'),
       '#required' => TRUE,
+      '#suffix' => '<div class="phone-number-validation-status"></div>',
+      '#ajax' => [
+        'callback' => '::validatePhoneNumberAjax',
+        'event' => 'change',
+        'wrapper' => 'phone-number-wrapper',
+        'progress' => [
+          'type' => 'throbber',
+          'message' => $this->t('Verifying...'),
+        ],
+      ],
     ];
 
     $form['email'] = [
@@ -50,6 +62,16 @@ final class APIconfigform extends ConfigFormBase {
       '#title' => $this->t('Email ID'),
       '#default_value' => $this->config('custom_form.settings')->get('email'),
       '#required' => TRUE,
+      '#suffix' => '<div class="email-validation-status"></div>',
+      '#ajax' => [
+        'callback' => '::validateEmailAjax',
+        'event' => 'change',
+        'wrapper' => 'email-wrapper',
+        'progress' => [
+          'type' => 'throbber',
+          'message' => $this->t('Verifying...'),
+        ],
+      ],
     ];
 
     $form['gender'] = [
@@ -68,34 +90,37 @@ final class APIconfigform extends ConfigFormBase {
   }
 
   /**
-   * {@inheritdoc}
+   * Ajax callback for phone number validation.
    */
-  public function validateForm(array &$form, FormStateInterface $form_state): void {
-    parent::validateForm($form, $form_state);
-
-    // Validate phone number.
+  public function validatePhoneNumberAjax(array &$form, FormStateInterface $form_state): AjaxResponse {
+    $response = new AjaxResponse();
     $phone_number = $form_state->getValue('phone_number');
     if (strlen($phone_number) !== 10 || !is_numeric($phone_number)) {
-      $form_state->setErrorByName(
-        'phone_number',
-        $this->t('Phone number should be a 10-digit number.')
-      );
+      $error_message = $this->t('Phone number should be a 10-digit number.');
+      $response->addCommand(new HtmlCommand('.phone-number-validation-status', '<div class="error">' . $error_message . '</div>'));
+    } else {
+      $response->addCommand(new HtmlCommand('.phone-number-validation-status', ''));
     }
+    return $response;
+  }
 
-    // Validate email.
+  /**
+   * Ajax callback for email validation.
+   */
+  public function validateEmailAjax(array &$form, FormStateInterface $form_state): AjaxResponse {
+    $response = new AjaxResponse();
     $email = $form_state->getValue('email');
     $email_validator = \Drupal::service('email.validator');
     if (!$email_validator->isValid($email)) {
-      $form_state->setErrorByName(
-        'email',
-        $this->t('Invalid email format.')
-      );
+      $error_message = $this->t('Invalid email format.');
+      $response->addCommand(new HtmlCommand('.email-validation-status', '<div class="error">' . $error_message . '</div>'));
     } elseif (!preg_match('/@(yahoo|gmail|outlook)\.com$/', $email)) {
-      $form_state->setErrorByName(
-        'email',
-        $this->t('Email address should be from Yahoo, Gmail, or Outlook.')
-      );
+      $error_message = $this->t('Email address should be from Yahoo, Gmail, or Outlook.');
+      $response->addCommand(new HtmlCommand('.email-validation-status', '<div class="error">' . $error_message . '</div>'));
+    } else {
+      $response->addCommand(new HtmlCommand('.email-validation-status', ''));
     }
+    return $response;
   }
 
   /**
