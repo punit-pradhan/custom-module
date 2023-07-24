@@ -1,0 +1,5 @@
+name: hello_world
+description: Creates a page showing "Hello World".
+
+type: module
+core_version_requirement: ^9.4 || ^10
