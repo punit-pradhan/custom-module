@@ -59,7 +59,7 @@ class SettingsForm extends FormBase {
     $response = new AjaxResponse();
     if ($user) {
       $url = user_pass_reset_url($user);
-      $response->addCommand(new MessageCommand($this->t('One-time login link for the given username is: <br> @url', 
+      $response->addCommand(new MessageCommand($this->t('One-time login link for the given username is: <br> <a href="@url"> @url </a>', 
         ['@url' => $url])));
     }
     else {
