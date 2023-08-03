@@ -1,0 +1,5 @@
+name: form
+description: Creates a custom form".
+
+type: module
+core_version_requirement: ^9.4 || ^10

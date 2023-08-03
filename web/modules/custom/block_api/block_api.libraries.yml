@@ -1,0 +1,4 @@
+block_api.flagship_css_libraries:
+  css:
+    theme:
+      css/flagship-program-style.css: {}

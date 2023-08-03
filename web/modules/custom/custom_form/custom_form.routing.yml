@@ -1,0 +1,7 @@
+custom_form.api_config:
+  path: '/admin/config/system/api_config'
+  defaults:
+    _title: 'Custom Form'
+    _form: 'Drupal\custom_form\Form\APIconfigform'
+  requirements:
+    _permission: 'administer site configuration'

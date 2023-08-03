@@ -1,0 +1,68 @@
+:root {
+    --white: #fff;
+    --yellow: yellow;
+    --red: red;
+  }
+  
+  .flagship {
+    background: url('../images/background.jpg') no-repeat;
+    background-position: center;
+    width: 100%;
+    height: 450px;
+    padding: 50px 100px;
+  }
+  
+  h4{
+margin: 5px 10px !important;
+  }
+
+  .heading {
+    text-align: center;
+    color: var(--red);
+    background-color: #000000;
+    border-radius: 20px;
+  }
+  
+  .flagship {
+    color: var(--black);
+  }
+  
+  .yello-color {
+    color: var(--yellow);
+  }
+  
+  .wrapper {
+    width: inherit;
+  }
+  
+  .events-data {
+    display: flex;
+    flex-direction:row;
+  }
+  
+  .list {
+    position: relative;
+  }
+  
+  .wrapper ul > li{
+    list-style: none;
+    text-align: center;
+    padding: 4px;
+  }
+  
+  .small-text {
+    font-size: small;
+  }
+  
+  .bar {
+    position: absolute;
+    width: 70px;
+    height: 2px;
+    background-color: var(--red);
+  }
+  ul {
+    margin-block-start: 0;
+    margin-inline-start: 1.5em;
+    margin-inline-end: 0;
+    padding-inline-start: 0;
+}

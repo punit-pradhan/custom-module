@@ -1,0 +1,7 @@
+yes:
+  path: '/admin/config/system/ottl_form'
+  defaults:
+    _title: 'Settings'
+    _form: 'Drupal\custom_otll_form\Form\SettingsForm'
+  requirements:
+    _permission: 'administer site configuration'
