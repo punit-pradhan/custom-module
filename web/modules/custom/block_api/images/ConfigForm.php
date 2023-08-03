@@ -5,9 +5,8 @@ namespace Drupal\block_api\Form;
 use Drupal\Core\Form\ConfigFormBase;
 use Drupal\Core\Form\FormStateInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
-use Drupal\block_api\services\Db_insert;
+use Drupal\Core\Database\Connection;
 use Drupal\Core\TempStore\PrivateTempStoreFactory; 
-
 class ConfigForm extends ConfigFormBase {
 
   protected $loaddata;
@@ -32,12 +31,23 @@ class ConfigForm extends ConfigFormBase {
 
   public static function create(ContainerInterface $container) {
     return new static(
-      $container->get('block_api.dbinsert'),
-      $container->get('tempstore.private'),
+      $container->get('block_api.dbinsert')
     );
   }
 
-  public function __construct(Db_insert $database, PrivateTempStoreFactory $temp_store_factory) {
+  public function __construct(Connection $database) {
+    $this->database = $database;
+  }
+
+  public static function create(ContainerInterface $container) {
+    return new static(
+      $container->get('block_api.dbinsert'),
+      $container->get('database'),
+      $container->get('tempstore.private')
+    );
+  }
+
+  public function __construct(Connection $database, PrivateTempStoreFactory $temp_store_factory) {
     $this->database = $database;
     $this->tempStore = $temp_store_factory->get('block_api'); // Initialize the tempstore object.
   }
@@ -131,7 +141,7 @@ class ConfigForm extends ConfigFormBase {
    * Override the form data.
    *
    * @param array $form
-   *   This array contains form information.
+   *   This array contains form informations.
    * @param FormStateInterface $form_state
    *   This tracks the form states.
    *
@@ -167,8 +177,8 @@ class ConfigForm extends ConfigFormBase {
     $form_state->setRebuild(TRUE);
   }
   
-   /**
-   * This function adds a new row in the form.
+  /**
+   * Remove a perticular row based on that it will update form.
    *
    * @param array $form
    *   This array contains form data.
@@ -184,25 +194,14 @@ class ConfigForm extends ConfigFormBase {
     $row_number = $triggering_element['#attributes']['row_number'];
     if (isset($data[$row_number])) {
       unset($data[$row_number]);
-      $this->tempStore->set('data', $data); // Save the updated data back to the tempstore.
-      if (empty($data)) {
+      $form_state->set('data', $data);
+      if ($form_state->get('data') === []) {
         $this->addRow($form, $form_state);
       }
-      $form_state->setRebuild(TRUE);
+      $this->tempStore->set('data', $data); // Save the updated data back to the tempstore.
+    $form_state->setRebuild(TRUE);
     }
   }
-
-/**
-   * Remove a particular row based on that it will update form.
-   *
-   * @param array $form
-   *   This array contains form data.
-   * @param FormStateInterface $form_state
-   *   This contains the form states.
-   *
-   * @return void
-   *
-   */
 
   /**
    * {@inheritdoc}

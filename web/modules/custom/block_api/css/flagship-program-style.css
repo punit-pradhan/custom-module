@@ -1,6 +1,7 @@
 :root {
     --white: #fff;
     --yellow: yellow;
+    --red: red;
   }
   
   .flagship {
@@ -11,12 +12,19 @@
     padding: 50px 100px;
   }
   
+  h4{
+margin: 5px 10px !important;
+  }
+
   .heading {
     text-align: center;
+    color: var(--red);
+    background-color: #000000;
+    border-radius: 20px;
   }
   
-  .flagship, .heading {
-    color: var(--white);
+  .flagship {
+    color: var(--black);
   }
   
   .yello-color {
@@ -28,7 +36,6 @@
   }
   
   .events-data {
-    padding: 20px 0px;
     display: flex;
     flex-direction:row;
   }
@@ -40,7 +47,7 @@
   .wrapper ul > li{
     list-style: none;
     text-align: center;
-    padding: 10px;
+    padding: 4px;
   }
   
   .small-text {
@@ -49,8 +56,13 @@
   
   .bar {
     position: absolute;
-    left: 50%;
-    width: 30px;
-    height: 8px;
-    background-color: var(--white);
+    width: 70px;
+    height: 2px;
+    background-color: var(--red);
   }
+  ul {
+    margin-block-start: 0;
+    margin-inline-start: 1.5em;
+    margin-inline-end: 0;
+    padding-inline-start: 0;
+}

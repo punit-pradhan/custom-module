@@ -1,0 +1,4 @@
+services:
+  block_api.dbinsert:
+    class: Drupal\block_api\services\Db_insert
+    arguments: ['@database']
