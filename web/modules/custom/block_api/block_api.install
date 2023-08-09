@@ -1,0 +1,48 @@
+<?php
+
+/**
+ * Implements hook_schema ().
+ *
+ */
+
+function block_api_schema()
+{
+    $schema['customform'] = array(
+        'fields' => array(
+            'Title' => array(
+                'description' => 'The primary identifier for the record.',
+                'type' => 'varchar',
+                'length' => 64,
+                'not null' => TRUE,
+            ),
+            'Label1' => array(
+                'description' => 'Label1',
+                'type' => 'varchar',
+                'length' => 64,
+                'not null' => FALSE,
+                'default'
+            ),
+            'Value1' => array(
+                'description' => 'Value1',
+                'type' => 'varchar',
+                'length' => 64,
+                'not null' => FALSE,
+                'default'
+            ), 'Label2' => array(
+                'description' => 'Label2',
+                'type' => 'varchar',
+                'length' => 64,
+                'not null' => FALSE,
+                'default'
+            ), 'Value2' => array(
+                'description' => 'Value2',
+                'type' => 'varchar',
+                'length' => 64,
+                'not null' => FALSE,
+                'default'
+            ),
+        ),
+        'primary key' => array('Title'),
+    );
+    return $schema;
+}
