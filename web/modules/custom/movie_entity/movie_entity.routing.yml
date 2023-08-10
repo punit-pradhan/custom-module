@@ -1,0 +1,31 @@
+movie_entity.add:
+  path: '/movie_entity/create'
+  defaults:
+    _entity_form: movie_entity.add
+    _title: 'Add movie'
+  requirements:
+    _permission: administer own offers
+
+entity.movie_entity.edit_form:
+  path: '/movie_entity/{movie_entity}/edit'
+  defaults:
+    _entity_form: movie_entity.edit
+    _title: 'Edit movie_entity'
+  requirements:
+    _permission: administer own offers
+
+
+entity.movie_entity.delete_form:
+  path: '/movie_entitys/{movie_entity}/delete'
+  defaults:
+    _entity_form: movie_entity.delete
+    _title: 'Delete movie_entity'
+  requirements:
+   _permission: administer own offers
+
+movie_entity.list:
+  path: '/admin/content/movie_entity'
+  defaults:
+    _entity_list: 'movie_entity'
+  requirements:
+    _permission: 'administer own offers'
