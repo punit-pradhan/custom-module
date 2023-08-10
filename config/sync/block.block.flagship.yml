@@ -1,0 +1,25 @@
+uuid: b676b2c2-1e7b-48f3-a086-141124a115bc
+langcode: en
+status: true
+dependencies:
+  module:
+    - block_api
+    - system
+  theme:
+    - olivero
+id: flagship
+theme: olivero
+region: hero
+weight: 0
+provider: null
+plugin: block_api_flagship
+settings:
+  id: block_api_flagship
+  label: Flagship
+  label_display: visible
+  provider: block_api
+visibility:
+  request_path:
+    id: request_path
+    negate: false
+    pages: /home

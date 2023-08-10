@@ -1,0 +1,25 @@
+uuid: 712500b7-3636-42ed-bdcd-6a4d9adf328c
+langcode: en
+status: true
+dependencies:
+  module:
+    - block_api
+    - system
+  theme:
+    - olivero
+id: customwelcomeroleblock
+theme: olivero
+region: hero
+weight: 0
+provider: null
+plugin: block_api_custom_welcome_block
+settings:
+  id: block_api_custom_welcome_block
+  label: 'Custom Welcome Role Block'
+  label_display: visible
+  provider: block_api
+visibility:
+  request_path:
+    id: request_path
+    negate: false
+    pages: /home
