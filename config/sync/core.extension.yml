@@ -15,6 +15,7 @@ module:
   config_entity_movie: 0
   contact: 0
   contextual: 0
+  custom_database: 0
   custom_form: 0
   custom_menu: 0
   custom_otll_form: 0
